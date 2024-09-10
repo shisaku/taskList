@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>タスクリスト</title>
-    @vite(['resources/js/app.ts'])
+    @vite(['resources/ts/taskListDisplay/defaultDisplay.ts'])
 </head>
 <body>
 <table>
@@ -29,6 +29,6 @@
     @endforeach
   </tbody>
 </table>
-<input type="button" value="+" />
+<input type="button" id="addRowButton"value="+" />
 </body>
 </html>
