@@ -9,7 +9,7 @@ export default defineConfig({
                     host: "localhost",
                 },
             },
-            input: ["resources/js/app.ts"],
+            input: ["resources/ts/import.ts"],
             refresh: true,
         }),
     ],
