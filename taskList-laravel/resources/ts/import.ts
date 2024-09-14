@@ -1,1 +1,1 @@
-import "./taskListDisplay/defaultDisplay";
+import "./taskListDisplay/defaultDisplay.ts";

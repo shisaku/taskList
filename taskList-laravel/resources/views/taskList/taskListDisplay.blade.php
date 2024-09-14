@@ -7,7 +7,7 @@
     @vite(['resources/ts/taskListDisplay/defaultDisplay.ts'])
 </head>
 <body>
-<table>
+<table id="taskListTable">
   <thead>
     <tr>
       <th>プロジェクト名</th>
@@ -15,20 +15,22 @@
       <th>サブタスク</th>
       <th>詳細タスク</th>
       <th>ステータス</th>
+      <th><button type="button" id="addRowButton">+</button></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="tbodySection">
     @foreach($taskList as $oneTask)
-    <tr>
-      <td><input type="text" value="{{$oneTask->PROJECT_NM}}"name="PROJECT_NM_LINE_{{ $loop->iteration }}" id=""></td>
-      <td><input type="text" value="{{$oneTask->TASK_NM}}" name="TASK_NM_LINE_{{ $loop->iteration }}"id=""></td>
-      <td><input type="text" value="{{$oneTask->SUB_TASK_NM}}" name="SUB_TASK_NM_LINE_{{ $loop->iteration }}"id=""></td>
-      <td><input type="text" value="{{$oneTask->DETAIL_TASK_NM}}" name="DETAIL_TASK_NM_LINE_{{ $loop->iteration }}"id=""></td>
-      <td><input type="text" value="{{$oneTask->STATUS}}" name="STATUS_LINE_{{ $loop->iteration }}"id=""></td>
+    <tr name="ROW{{ $loop->iteration }}">
+      <td><input type="text" value="{{$oneTask->PROJECT_NM}}"name="ROW{{ $loop->iteration }}[PROJECT_NM]" ></td>
+      <td><input type="text" value="{{$oneTask->TASK_NM}}" name="ROW{{ $loop->iteration }}[TASK_NM]"></td>
+      <td><input type="text" value="{{$oneTask->SUB_TASK_NM}}" name="ROW{{ $loop->iteration }}[SUB_TASK_NM]"></td>
+      <td><input type="text" value="{{$oneTask->DETAIL_TASK_NM}}" name="ROW{{ $loop->iteration }}[DETAIL_TASK_NM]"></td>
+      <td><input type="text" value="{{$oneTask->STATUS}}" name="ROW{{ $loop->iteration }}[STATUS]"></td>
+      <td><button type="button" class="deleteRowButton">-</button></td>
     </tr>
     @endforeach
   </tbody>
 </table>
-<input type="button" id="addRowButton"value="+" />
+
 </body>
 </html>
