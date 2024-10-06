@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\T_Task;
 
+use App\Models\T_Task;
 use Illuminate\Http\Request;
 
 class TaskListController extends Controller
@@ -13,5 +13,11 @@ class TaskListController extends Controller
         $taskList = $T_Task->getTaskList();
         
         return view('taskList/taskListDisplay',compact('taskList'));
+    }
+
+    //タスクリストの登録
+    public function register(Request $request){
+        
+
     }
 }

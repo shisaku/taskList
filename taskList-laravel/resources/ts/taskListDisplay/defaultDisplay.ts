@@ -1,5 +1,7 @@
 //初期表示時
 document.addEventListener('DOMContentLoaded', (event: Event) => {
+    //
+
     //行追加ボタンにクリックイベント付与
     const addRowButton = document.getElementById('addRowButton');
     addRowButton?.addEventListener('click', addTaskListRow);
@@ -22,23 +24,22 @@ type rowInputNamePropertyObj = {
 const addTaskListRow = function () {
     //tr追加
     const taskListTable: HTMLTableElement = document.getElementById('taskListTable') as HTMLTableElement;
-    let rowNumber = getCurrentAllRowNumber() + 1;
     const addNewTrElement = taskListTable?.insertRow();
-    addNewTrElement.setAttribute('name', 'ROW' + rowNumber);
+    addNewTrElement.setAttribute('id', `${currentMaxTaskDetailNoPlusOne()}`);
 
     //tdとその中身（input）を追加
     const tableRowNameProperty: rowInputNamePropertyObj = {
-        projectNm: '[PROJECT_NM]',
-        taskNm: '[TASK_NM]',
-        subtaskNm: '[SUB_TASK_NM]',
-        detailNm: '[DETAIL_TASK_NM]',
-        status: '[STATUS]',
+        projectNm: 'PROJECT_NM',
+        taskNm: 'TASK_NM',
+        subtaskNm: 'SUB_TASK_NM',
+        detailNm: 'DETAIL_TASK_NM',
+        status: 'STATUS',
     };
 
     for (const nameProperty in tableRowNameProperty) {
         const addNewTdElement: HTMLTableCellElement = addNewTrElement.insertCell();
         const addNewTdIntoInput = addNewTdElement.appendChild(createInputElementTypeText());
-        addNewTdIntoInput.setAttribute('name', 'ROW' + rowNumber + tableRowNameProperty[nameProperty]);
+        addNewTdIntoInput.setAttribute('name', tableRowNameProperty[nameProperty]);
     }
     //tdとその中身（button）を追加
     const addNewTdElement = addNewTrElement.insertCell();
@@ -71,4 +72,15 @@ const createButtonElementTypeButton = function (): HTMLButtonElement {
 const getCurrentAllRowNumber = function (): number {
     const tbody = document.getElementById('tbodySection') as HTMLTableElement;
     return tbody.rows.length;
+};
+
+//現在のTASK_DETAIL_NO+1した値を返却
+const currentMaxTaskDetailNoPlusOne = async function () {
+    try {
+        const response = await fetch('http://localhost/taskListDetail/fetchTaskListDetailNo');
+        const currentMaxTaskDetailNo = await response.json();
+        return currentMaxTaskDetailNo;
+    } catch (error) {
+        console.error('Error:', error);
+    }
 };
